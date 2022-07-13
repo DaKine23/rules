@@ -1,0 +1,18 @@
+//0.0.1
+rule PrototypeRule1 "foo to bar" salience 10 {
+	when
+		Input.Value == "foo"
+	then
+		Input.Value = "bar";
+        Input.Audits.Append(Input.NewAudit(Now(),"i bared a foo with PrototypeRule1"));
+		Retract("PrototypeRule1");
+}
+
+rule PrototypeRule2 "bar to foo" salience 5 {
+	when
+		Input.Value == "bar"
+	then
+		Input.Value = "superfoo";
+        Input.Audits.Append(Input.NewAudit(Now(),"i superfooed a bar with PrototypeRule2"));
+        Retract("PrototypeRule2");
+}
